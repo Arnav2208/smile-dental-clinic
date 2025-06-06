@@ -346,23 +346,20 @@
 </section>
 
 <style>
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 18px;
-    max-width: 900px;
-    margin: 0 auto 80px;
-    padding: 0 20px;
-  }
-  .gallery-grid img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    object-fit: contain;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-    height: auto 
-  }
+  .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 200px; /* Keeps layout consistent */
+  object-fit: contain; /* Shows full image, no crop */
+  background-color: #f0f0f0; /* Optional: fill empty space */
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
   .gallery-grid img:hover {
     transform: scale(1.05);
   }
