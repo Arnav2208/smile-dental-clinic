@@ -125,19 +125,38 @@
     color: #444;
     font-weight: 500;
   }
-  /* Services Horizontal Scroll */
-  #services {
-    max-width: 1000px;
-    margin: 50px auto 80px;
-    padding: 0 10px;
-  }
-  .services-container {
-    display: flex;
-    gap: 18px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
-    padding-bottom: 10px;
-  }
+  /* Services Section - Responsive Grid */
+#services {
+  max-width: 1000px;
+  margin: 50px auto 80px;
+  padding: 0 10px;
+}
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+.services-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.services-container li {
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 20px 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #007bff;
+  text-align: center;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.services-container li:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 18px rgba(0,123,255,0.25);
+}
   .service-card {
     min-width: 160px;
     background: white;
@@ -307,27 +326,25 @@
   </p>
 </section>
 
-<section id="services">
+<section class="services">
   <h2>Our Services</h2>
-  <div class="services-container" tabindex="0" aria-label="Dental services, scroll horizontally">
-    <div class="service-card">Teeth Whitening</div>
-    <div class="service-card">Bonding</div>
-    <div class="service-card">Checkups</div>
-    <div class="service-card">Cosmetic Procedures</div>
-    <div class="service-card">Dental Implants</div>
-    <div class="service-card">Dentures & Bridges</div>
-    <div class="service-card">Emergency Care</div>
-    <div class="service-card">Extractions</div>
-    <div class="service-card">Fillings & Sealants</div>
-    <div class="service-card">Laser Dentistry</div>
-    <div class="service-card">Mouth Guards</div>
-    <div class="service-card">Online Dentist Booking</div>
-    <div class="service-card">Oral Surgery</div>
-    <div class="service-card">Root Canals</div>
-    <div class="service-card">Teeth Cleaning</div>
-    <div class="service-card">Teeth Reshaping</div>
-    <div class="service-card">Veneers & Crowns</div>
-    <div class="service-card">X-ray</div>
+  <div class="services-container">
+    <ul class="column">
+      <li>Dental X-Rays</li>
+      <li>Extraction (Painless)</li>
+      <li>R.C.T. (Tooth Saving) (Root Canal Treatment)</li>
+      <li>Tooth Coloured Filling (Cosmetic Dentistry)</li>
+      <li>Ultra Sonic Scaling (Cleaning of Teeth)</li>
+      <li>Treatment of Gum Diseases (Pyorrhoea)</li>
+      <li>Crown & Bridge Work (RPD's, FPD's, Complete U/L)</li>
+    </ul>
+    <ul class="column">
+      <li>Dentures</li>
+      <li>Teeth Bleaching</li>
+      <li>Braces (Orthodontic Treatment)</li>
+      <li>Minor Surgery (Curettage, Cyst Removal etc.)</li>
+      <li>Major Surgery (Fracture Reduction, Maxilla & Mandible etc.)</li>
+    </ul>
   </div>
 </section>
 
