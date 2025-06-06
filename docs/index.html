@@ -472,7 +472,7 @@ Additional Info: ${encodeURIComponent(info)}`;
     const clinicPhone = '919810780438'; // Your clinic WhatsApp number without '+' sign
 
     // Open WhatsApp chat with pre-filled message in new tab
-   const waUrl = https://wa.me/${clinicPhone}?text=${message};
+   const waUrl = `https://wa.me/${clinicPhone}?text=${message} `;
     window.open(waUrl, '_blank');
 
     // Optionally, reset form
