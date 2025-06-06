@@ -463,14 +463,12 @@
       return false;
     }
 
-    const message =
-      Appointment Request:%0A +
-      Name: ${encodeURIComponent(name)}%0A +
-      Phone: ${encodeURIComponent(phone)}%0A +
-      Preferred Day: ${encodeURIComponent(day)}%0A +
-      Preferred Time: ${encodeURIComponent(time)}%0A +
-      Additional Info: ${encodeURIComponent(info)};
-
+   const message = `Appointment Request:%0A
+Name: ${encodeURIComponent(name)}%0A
+Phone: ${encodeURIComponent(phone)}%0A
+Preferred Day: ${encodeURIComponent(day)}%0A
+Preferred Time: ${encodeURIComponent(time)}%0A
+Additional Info: ${encodeURIComponent(info)}`;
     const clinicPhone = '919810780438'; // Your clinic WhatsApp number without '+' sign
 
     // Open WhatsApp chat with pre-filled message in new tab
