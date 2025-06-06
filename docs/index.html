@@ -391,6 +391,9 @@
     <label for="phone">Phone Number <sup>*</sup></label>
     <input type="tel" id="phone" name="phone" pattern="[0-9]{10,15}" required placeholder="Digits only" />
 
+    <label for="date">Appointment Date <sup>*</sup></label>
+    <input type="date" id="date" name="date" required min="" />
+
     <label for="day">Preferred Day <sup>*</sup></label>
     <select id="day" name="day" required>
       <option value="" disabled selected>Select a day</option>
@@ -440,6 +443,11 @@
 </section>
 
 <script>
+  // Set min attribute of date input to today's date (can't book for past dates)
+  const dateInput = document.getElementById('date');
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.min = today;
+
   document.getElementById("appointmentForm").addEventListener("submit", function(e) {
     e.preventDefault(); // Prevent default form submit
 
@@ -448,6 +456,7 @@
     // Get form values
     const name = form.name.value.trim();
     const phone = form.phone.value.trim();
+    const date = form.date.value;
     const day = form.day.value;
     const time = form.time.value;
     const info = form.info.value.trim() || "No additional info";
@@ -459,30 +468,32 @@
       return;
     }
 
-    // Prepare data object
-    const data = { name, phone, day, time, info };
+    // Check date selected
+    if (!date) {
+      alert("Please select an appointment date.");
+      return;
+    }
 
-    // Google Apps Script URL - replace with your actual URL
-    const scriptURL = "https://script.google.com/macros/s/AKfycbxItC96_s9QHeawesUXwaX3nc3sQIXhSN0izIKJ6axwJ_R0HmapAuHQGRr3tF5G3oxX/exec";
+    // Format WhatsApp message
+    const message = 
+      Appointment Request:%0A +
+      Name: ${encodeURIComponent(name)}%0A +
+      Phone: ${encodeURIComponent(phone)}%0A +
+      Appointment Date: ${encodeURIComponent(date)}%0A +
+      Preferred Day: ${encodeURIComponent(day)}%0A +
+      Preferred Time: ${encodeURIComponent(time)}%0A +
+      Additional Info: ${encodeURIComponent(info)};
 
-    // Send POST request with form data as JSON
-    fetch(scriptURL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    })
-      .then(response => {
-        if (response.ok) {
-          alert("Appointment request sent successfully!");
-          form.reset();
-        } else {
-          alert("Error: Could not send appointment request.");
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert("An error occurred. Please try again later.");
-      });
+    const clinicPhone = "919810780438"; // WhatsApp number without + sign
+
+    // WhatsApp URL with message
+    const waUrl = https://wa.me/${clinicPhone}?text=${message};
+
+    // Open WhatsApp chat in new tab
+    window.open(waUrl, "_blank");
+
+    // Reset form
+    form.reset();
   });
 </script>
 </body>
