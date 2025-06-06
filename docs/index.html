@@ -476,13 +476,13 @@
 
     // Format WhatsApp message
     const message = 
-      Appointment Request:%0A +
+      `Appointment Request:%0A +
       Name: ${encodeURIComponent(name)}%0A +
       Phone: ${encodeURIComponent(phone)}%0A +
       Appointment Date: ${encodeURIComponent(date)}%0A +
       Preferred Day: ${encodeURIComponent(day)}%0A +
       Preferred Time: ${encodeURIComponent(time)}%0A +
-      Additional Info: ${encodeURIComponent(info)};
+      Additional Info: ${encodeURIComponent(info)}`;
 
     const clinicPhone = "919810780438"; // WhatsApp number without + sign
 
