@@ -501,7 +501,7 @@ Additional Info: ${encodeURIComponent(info)}`;
       headers: {
         "Content-Type": "application/json"
       }
-    })
+    }
     .then(response => {
       if (response.ok) {
         alert("Appointment request sent successfully!");
