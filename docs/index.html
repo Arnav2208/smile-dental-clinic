@@ -384,7 +384,7 @@
 
 <section id="appointment">
   <h2>Book an Appointment</h2>
-  <form id="appointmentForm" onsubmit="return sendWhatsAppMessage()">
+  <form id="appointmentForm">
     <label for="name">Full Name <sup>*</sup></label>
     <input type="text" id="name" name="name" required placeholder="Your full name" />
 
@@ -483,6 +483,39 @@
     return false; // prevent form submission
   }
 </script>
+  document.getElementById("appointmentForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // Prevent default form submission
 
+    const form = e.target;
+
+    const data = {
+      name: form.name.value.trim(),
+      phone: form.phone.value.trim(),
+      day: form.day.value,
+      time: form.time.value,
+      info: form.info.value.trim() || "No additional info"
+    };
+
+    fetch("https://script.google.com/macros/s/AKfycbxItC96_s9QHeawesUXwaX3nc3sQIXhSN0izIKJ6axwJ_R0HmapAuHQGRr3tF5G3oxX/exec", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        alert("Appointment request sent successfully!");
+        form.reset();
+      } else {
+        alert("Error: Could not send appointment request.");
+      }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+      alert("An error occurred. Please try again later.");
+    });
+  });
+</script>
 </body>
 </html>
