@@ -333,10 +333,38 @@
 
 <section id="gallery">
   <h2>Clinic Gallery</h2>
-  <div class="gallery-placeholder">
-    <p>Gallery coming soon! You can add photos later.</p>
+  <div class="gallery-grid">
+    <img src="gallery/clinic-photo-1.jpg" />
+    <img src="gallery/clinic-photo-2.jpg" />
+    <img src="gallery/clinic-photo-3.jpg" />
+    <img src="gallery/clinic-photo-4.jpg" />
+    <img src="gallery/clinic-photo-5.jpg" />
+    <img src="gallery/clinic-photo-6.jpg" />
   </div>
 </section>
+
+<style>
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    max-width: 900px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+  }
+  .gallery-grid img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    object-fit: cover;
+    aspect-ratio: 4 / 3;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  .gallery-grid img:hover {
+    transform: scale(1.05);
+  }
+</style>
 
 <section id="appointment">
   <h2>Book an Appointment</h2>
