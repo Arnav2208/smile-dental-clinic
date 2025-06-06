@@ -439,81 +439,50 @@
   ></iframe>
 </section>
 
-<div class="floating-buttons" aria-label="Quick contact buttons">
-  <a href="tel:+919810780438" class="call-btn" aria-label="Call Smile Dental Clinic">📞</a>
-  <a href="https://wa.me/919810780438" target="_blank" rel="noopener" aria-label="Chat with Smile Dental Clinic on WhatsApp">💬</a>
-</div>
-
-<footer style="background:#007bff; color:white; text-align:center; padding: 1rem; font-weight:600;">
-  &copy; 2025 Smile Dental Clinic. All rights reserved.
-</footer>
-
 <script>
-  function sendWhatsAppMessage() {
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const day = document.getElementById('day').value;
-    const time = document.getElementById('time').value;
-    const info = document.getElementById('info').value.trim() || 'No additional info';
-
-    // Validate phone digits only
-    const phoneRegex = /^[0-9]{10,15}$/;
-    if (!phoneRegex.test(phone)) {
-      alert('Please enter a valid phone number with digits only (10 to 15 digits).');
-      return false;
-    }
-
-   const message = `Appointment Request:%0A
-Name: ${encodeURIComponent(name)}%0A
-Phone: ${encodeURIComponent(phone)}%0A
-Preferred Day: ${encodeURIComponent(day)}%0A
-Preferred Time: ${encodeURIComponent(time)}%0A
-Additional Info: ${encodeURIComponent(info)}`;
-    const clinicPhone = '919810780438'; // Your clinic WhatsApp number without '+' sign
-
-    // Open WhatsApp chat with pre-filled message in new tab
-   const waUrl = `https://wa.me/${clinicPhone}?text=${message} `;
-    window.open(waUrl, '_blank');
-
-    // Optionally, reset form
-    document.getElementById('appointmentForm').reset();
-
-    return false; // prevent form submission
-  }
-</script>
- <script>
   document.getElementById("appointmentForm").addEventListener("submit", function(e) {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault(); // Prevent default form submit
 
     const form = e.target;
 
-    const data = {
-      name: form.name.value.trim(),
-      phone: form.phone.value.trim(),
-      day: form.day.value,
-      time: form.time.value,
-      info: form.info.value.trim() || "No additional info"
-    };
+    // Get form values
+    const name = form.name.value.trim();
+    const phone = form.phone.value.trim();
+    const day = form.day.value;
+    const time = form.time.value;
+    const info = form.info.value.trim() || "No additional info";
 
-    fetch("https://script.google.com/macros/s/AKfycbxItC96_s9QHeawesUXwaX3nc3sQIXhSN0izIKJ6axwJ_R0HmapAuHQGRr3tF5G3oxX/exec"), {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json"
-      }
+    // Validate phone number (digits only, 10 to 15 digits)
+    const phoneRegex = /^[0-9]{10,15}$/;
+    if (!phoneRegex.test(phone)) {
+      alert("Please enter a valid phone number with digits only (10 to 15 digits).");
+      return;
     }
-    .then(response => {
-      if (response.ok) {
-        alert("Appointment request sent successfully!");
-        form.reset();
-      } else {
-        alert("Error: Could not send appointment request.");
-      }
+
+    // Prepare data object
+    const data = { name, phone, day, time, info };
+
+    // Google Apps Script URL - replace with your actual URL
+    const scriptURL = "https://script.google.com/macros/s/AKfycbxItC96_s9QHeawesUXwaX3nc3sQIXhSN0izIKJ6axwJ_R0HmapAuHQGRr3tF5G3oxX/exec";
+
+    // Send POST request with form data as JSON
+    fetch(scriptURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
     })
-    .catch(error => {
-      console.error("Error:", error);
-      alert("An error occurred. Please try again later.");
-    });
+      .then(response => {
+        if (response.ok) {
+          alert("Appointment request sent successfully!");
+          form.reset();
+        } else {
+          alert("Error: Could not send appointment request.");
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("An error occurred. Please try again later.");
+      });
   });
 </script>
 </body>
